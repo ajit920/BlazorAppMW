@@ -1,0 +1,507 @@
+﻿@page "/payment/{AccountNum}/{AmountDue}/{MinDue?}"
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+
+<div class="">
+
+    @if (!string.IsNullOrEmpty(BmxSessionToken) && IsValidAccountNumber)
+    {
+
+        <div class="row g-3">
+            <div class="col-md-12">
+                @*<span>Summary</span>*@
+
+                <div class="card">
+
+                    <!--<div class="d-flex justify-content-between p-3">
+
+                    <div class="d-flex flex-column">
+
+                        <span>Amout Due </span>-->
+                    @*<a href="#" class="billing">Save 20% with annual billing</a>*@
+                    @*<i class="fa fa-caret-down"></i>*@
+                    <!--</div>
+
+                    <div class="mt-1">
+                        <sup class="super-price">$@AmountDue</sup>-->
+                    @* <span class="super-month">/Month</span>*@
+                    <!--</div>
+
+                    </div>-->
+                    @*  <hr class="mt-0 line">*@
+
+
+
+                    @*<hr class="mt-0 line">*@
+                    <div class="p-3">
+
+                        <div class="d-flex justify-content-between">
+                            <div class="accordion" id="paymentSummaryAccordion" style="">
+                                <div class="card-header p-0" style="margin-bottom: 10px;" id="headingSelection">
+                                    <span class="mb-0">
+                                        <a class="" data-toggle="collapse" data-target="#collapseSelection" aria-expanded="true" aria-controls="collapseSelection">
+                                            <span>Payable Amount <i class="fa fa-caret-down"></i></span>
+                                        </a>
+                                    </span>
+                                </div>
+
+                                <div id="collapseSelection" class="collapse" aria-labelledby="headingSelection" data-parent="#paymentSummaryAccordion" style="">
+                                    <div class="row m-0 border">
+                                        <div class="col-6 ">
+                                            <span class="d-block py-2">Total Amount</span>
+                                            <span class="d-block py-2">Minimum Due</span>
+                                            <span class="d-block py-2">Other Amount</span>
+                                        </div>
+                                        <div class="col-3 text-center p-0">
+                                            <span class="d-block p-2 "><span class="fas fa-dollar-sign"></span>@AmountDue</span>
+                                            <span class="d-block p-2"><span class="fas fa-dollar-sign"></span>@MinDue</span>
+                                            <span class="d-block p-2"><input type="number" @oninput="(e)=> PayableAmount = e.Value.ToString()" name="txtOtherAmount" id="txtOtherAmount" style="height:auto" class="form-control form-control-sm" autocomplete="off" value="" placeholder="$"></span>
+                                        </div>
+                                        <div class="col-3 p-0 text-center border-end">
+                                            <span class="d-block py-2">
+                                                <input type="radio" class="" data-value="@AmountDue" name="amountradio" value="@AmountDue" @onchange="OnChange" checked="">
+                                            </span>
+                                            <span class="d-block py-2 "><input type="radio" class="" data-value="@MinDue" @onchange="OnChange" name="amountradio" value="@MinDue"></span>
+                                            <span class="d-block py-2 "><input type="radio" class="" data-value="0" @onchange="OnChange" name="amountradio" value="0"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="" id="payableAmountLabel">$@PayableAmount</span>
+                        </div>
+
+                    </div>
+
+                    <div class="p-3">
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Account Number</span>
+                            <span>@AccountNum</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Last Statement Date</span>
+                            <span>May 15</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Due Date</span>
+                            <span>May 30</span>
+                        </div>
+
+                    </div>
+                    <hr class="mt-0 line" />
+
+                    <div style="padding-left:1em">
+                        <span class="mb-0">
+                            <span>
+                                <span>Pay With <i class="fa fa-angle-down"></i></span>
+                            </span>
+                        </span>
+                    </div>
+                    @*<div class="p-3 d-flex "><span>Make Payment using </span></div>*@
+                    <div class="p-3 d-flex justify-content-between">
+                        <div class="card">
+                            <div class="accordion" id="accordionExample" style="">
+                                <div class="card">
+                                    <div class="card-header p-0" id="headingTwo">
+                                        <h2 class="mb-0">
+
+
+                                            <button class="btn btn-light btn-block text-left p-3 rounded-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <span>Credit card</span>
+                                                    <div class="icons">
+                                                        <i class="fa fa-credit-card"></i>
+                                                    </div>
+
+                                                </div>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+
+
+                                        <div class="card-body payment-card-body">
+
+                                            <span class="font-weight-normal card-text">Card Number</span>
+                                            <div class="input">
+                                                <i class="fa fa-credit-card"></i>
+                                                <input type="tel" class="form-control" maxlength="16"  required placeholder="0000 0000 0000 0000">
+                                            </div>
+
+                                            <div class="row mt-3 mb-3">
+
+                                                <div class="col-md-6">
+
+                                                    <span class="font-weight-normal card-text">Expiry Date</span>
+                                                    <div class="input">
+
+                                                        <i class="fa fa-calendar"></i>
+                                                        <input type="text" class="form-control" placeholder="MM/YY">
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-md-6">
+
+                                                    <span class="font-weight-normal card-text">CVC/CVV</span>
+                                                    <div class="input">
+
+                                                        <i class="fa fa-lock"></i>
+                                                        <input type="password" maxlength="3" class="form-control" placeholder="000">
+
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="row mt-3 mb-3">
+
+                                                <div class="col-md-6">
+                                                    <span class="font-weight-normal card-text">Name on the Card</span>
+                                                    <div class="input">
+
+                                                        <i class="fa fa-user-secret" aria-hidden="true"></i>
+                                                        <input type="text" class="form-control" placeholder="Name displayed on your physical credit card">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="font-weight-normal card-text">Zip</span>
+                                                    <div class="input">
+
+                                                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                                                        <input type="text" class="form-control" placeholder="Zip code of your credit card communication address">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <span class="text-muted certificate-text"><i class="fa fa-lock"></i> Your transaction is secured with ssl certificate</span>
+                                            <div class="p-3">
+
+                                                <button class="btn btn-primary btn-block free-button" @onclick="PaynowCardClick" style=" display: block;">
+                                                    @if (ShowProgressbtn)
+                                                    {
+                                                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                        @ProgressMessage
+                                                    }
+                                                    else
+                                                    {
+                                                        @ButtonText
+                                                    }
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header p-0">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <span>Bank ACH</span>
+                                                    <i class="fa fa-university"></i>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+
+                                        <div class="card-body payment-card-body">
+                                            <div class="row mt-3 mb-3">
+
+                                                <div class="col-md-12">
+                                                    <span class="font-weight-normal card-text">Bank Route Number</span>
+                                                    <div class="input">
+                                                        <i class="fa fa-info" aria-hidden="true"></i>
+                                                        <input type="text" class="form-control" placeholder="ex:011002550">
+                                                    </div>
+                                                    <span class="font-weight-normal card-text">Checking Account Number</span>
+                                                    <div class="input">
+                                                        <i class="fa fa-info" aria-hidden="true"></i>
+                                                        <input type="text" class="form-control" placeholder="ex:9900990094">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-3 mb-3">
+
+                                                <div class="col-md-6">
+
+                                                    <span class="font-weight-normal card-text">First Name</span>
+                                                    <div class="input">
+
+                                                        <i class="fa fa-info"></i>
+                                                        <input type="text" class="form-control" placeholder="As per bank records">
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-md-6">
+
+                                                    <span class="font-weight-normal card-text">Last Name</span>
+                                                    <div class="input">
+
+                                                        <i class="fa fa-info"></i>
+                                                        <input type="text" class="form-control" placeholder="As per bank records">
+
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="p-3">
+                                                <button class="btn btn-primary btn-block free-button" style=" display: block;">Pay Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="card">
+                                    <div class="card-header p-0">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <span>Apple Pay</span>
+                                                    <i class="fab fa-apple-pay"></i>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div id="collapseThree" class="collapse" aria-labelledby="" data-parent="#accordionExample">
+                                        <div class="card-body payment-card-body">
+                                            Added Soon..
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header p-0">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <span>Google Pay</span>
+                                                    <i class="fab fa-google-pay"></i>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div id="collapseFour" class="collapse" aria-labelledby="" data-parent="#accordionExample">
+
+                                        <div class="card-body payment-card-body">
+                                            Added Soon..
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+
+    }
+
+    else
+    {
+
+        <div class="spinner-grow" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <label>
+            Please wait..Connecting to Payment API and creating a session for you..
+        </label>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public string AccountNum { get; set; }
+
+    [Parameter]
+    public string AmountDue { get; set; }
+
+    [Parameter]
+    public string? MinDue { get; set; }
+
+    string PayableAmount = "0";
+
+    bool ShowProgressbtn = false;
+
+    string CreditCardNumber = "";
+
+    string ProgressMessage = "Please wait... Processing payment";
+
+    string ButtonText = "Pay Now";
+
+    string BmxSessionToken = string.Empty;
+
+    bool IsValidAccountNumber = false;
+
+    BlockingResult AvailablePaymentMethods = new();
+
+    private void OnChange(ChangeEventArgs args)
+    {
+        //CurrentValueAsString = args.Value.ToString();
+        PayableAmount = args.Value.ToString();
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        PayableAmount = AmountDue;
+        MinDue = MinDue ?? "9.99";
+        var sessionTokenReq = new SessionTokenRequest()
+        {
+            AgentId = null,
+            BillingAccount = AccountNum ?? "900110323",
+            UserId = AccountNum ?? "900110323",
+            UiChannel = "Web"
+        };
+
+        StringContent stringContent = new(JsonConvert.SerializeObject(sessionTokenReq), Encoding.UTF8,
+                                     "application/json");
+        var responseSession = await Http.PostAsync("payment/session/create/1234", stringContent).ConfigureAwait(true);
+        if (responseSession.IsSuccessStatusCode)
+        {
+            var responseText = await responseSession.Content.ReadAsStringAsync().ConfigureAwait(true);
+            var sessionToken = JsonConvert.DeserializeObject<SessionTokenResponse>(responseText);
+            BmxSessionToken = sessionToken.SessionToken;
+
+        }
+
+        if (!string.IsNullOrEmpty(BmxSessionToken))
+        {
+            if (!Http.DefaultRequestHeaders.Any(d => d.Key == "x-SessionToken")) Http.DefaultRequestHeaders.Add("x-SessionToken", BmxSessionToken);
+            var accountValidationResponse = await Http.PostAsync("payment/account/validation", null).ConfigureAwait(true);
+            if (accountValidationResponse.IsSuccessStatusCode)
+            {
+                var responseText = await accountValidationResponse.Content.ReadAsStringAsync().ConfigureAwait(true);
+                var billingAccountResponse = JsonConvert.DeserializeObject<BillingAccountResponse>(responseText);
+                IsValidAccountNumber = billingAccountResponse.billingAccountDetail.billingAccountLookupResponse.isAccountFound;
+                AvailablePaymentMethods = billingAccountResponse.billingAccountDetail.billingAccountAcceptanceResponse.blockingResult;
+            }
+            else
+                IsValidAccountNumber = true;
+
+        }
+
+        Console.WriteLine("BmxSessionToken value receieved " + BmxSessionToken);
+        Console.WriteLine("IsValidAccountNumber " + IsValidAccountNumber);
+
+
+    }
+    private async Task PaynowCardClick()
+    {
+        ShowProgressbtn = true;
+        FundingAccountCardResponse FundingAccountCardResponse = new();
+        PaymentResponse paymentResponse = new();
+        await Task.Delay(5000);
+
+        if (!string.IsNullOrEmpty(BmxSessionToken))
+        {
+            FundingAccountCardRequest fundingAccountCardRequest = new()
+            {
+
+                cardDetail = new CardDetail
+                {
+                    cardNumber = "4100010000000562",
+                    expirationDate = "0624",
+                    securityCode = "666",
+                    zipCode = "75231",
+                    firstName = "Nana",
+                    lastName = "Saheb",
+                    nameOnCard = "Nanasaheb Raktate"
+                }
+            };
+
+            StringContent stringContent = new(JsonConvert.SerializeObject(fundingAccountCardRequest), Encoding.UTF8,
+                                         "application/json");
+
+            if (!Http.DefaultRequestHeaders.Any(d => d.Key == "x-SessionToken")) Http.DefaultRequestHeaders.Add("x-SessionToken", BmxSessionToken);
+            var responseMessage = await Http.PostAsync("payment/account/funding/card", stringContent).ConfigureAwait(true);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var responseText = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(true);
+                FundingAccountCardResponse = JsonConvert.DeserializeObject<FundingAccountCardResponse>(responseText);
+                Console.WriteLine(FundingAccountCardResponse);
+            }
+            if (!string.IsNullOrEmpty(FundingAccountCardResponse?.fundingAccountValidationResult?.fundingAccount?.fundingAccountToken))
+            {
+                Console.WriteLine("Received the funding token " + FundingAccountCardResponse?.fundingAccountValidationResult?.fundingAccount?.fundingAccountToken);
+                //if(!Http.DefaultRequestHeaders.Any(d=>d.Key == "x-SessionToken")) Http.DefaultRequestHeaders.Add("x-SessionToken", BmxSessionToken);
+
+                PaymentRequest paymentRequest = new PaymentRequest
+                {
+                    paymentAmount = 66.00,
+                    paymentCustomList = null,
+                    addToWallet = true,
+                    fundingAccountToken = FundingAccountCardResponse?.fundingAccountValidationResult?.fundingAccount?.fundingAccountToken,
+                    zipCode = 48038,
+                    securityCode = null,
+                    emailAddress = "Nanasaheb.Raktate@fiserv.com",
+                    transactionNote = "APIPaymentfor BSC",
+                    allowDuplicatePayment = true,
+                    paymentType = "BILL_PAYMENT"
+                };
+                StringContent stringapymentrequestContent = new(JsonConvert.SerializeObject(paymentRequest), Encoding.UTF8,
+                                        "application/json");
+                var responsePayment = await Http.PostAsync("payment/make", stringapymentrequestContent).ConfigureAwait(true);
+
+                if (responsePayment.IsSuccessStatusCode)
+                {
+
+                    var responseText = await responsePayment.Content.ReadAsStringAsync().ConfigureAwait(true);
+                    Console.WriteLine(responseText);
+                    paymentResponse = JsonConvert.DeserializeObject<PaymentResponse>(responseText);
+                    if (paymentResponse.result.StatusCode == "Success")
+                    {
+                        //NavigationManager.NavigateTo("pay/1234");
+                    }
+                }
+            }
+
+        }
+        NavigationManager.NavigateTo($"pay/{paymentResponse.paymentEventID}");
+    }
+}
