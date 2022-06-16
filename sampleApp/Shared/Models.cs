@@ -310,5 +310,70 @@ namespace sampleApp.Shared
         [JsonProperty("description")]
         public string Description { get; set; }
     }
+
+    public class ApplePaymentResponse
+    {
+        public Result result { get; set; }
+        public string confirmationCode { get; set; }
+        public string paymentAuthorizationStatus { get; set; }
+        public string fundingMethod { get; set; }
+        public string paymentAccountLastFourDigit { get; set; }
+        public string paymentAmountValidationState { get; set; }
+        public string paymentEventID { get; set; }
+    }
+
+
+
+    public class FundingAccountACHWalletRequest
+    {
+        public string nickName { get; set; }
+        public string emailAddress { get; set; }
+        public CheckDetail checkDetail { get; set; }
+        public bool isDefaultFundingSource { get; set; }
+    }
+
+    public class FundingAccountACHWalletResponse
+    {
+        public Result result { get; set; }
+        public WalletFundingAccount walletFundingAccount { get; set; }
+        public CheckValidationDetail checkValidationDetail { get; set; }
+    }
+    public class CardWalletDetail
+    {
+        public string cardNumber { get; set; }
+        public string expirationDate { get; set; }
+        public string securityCode { get; set; }
+        public string zipCode { get; set; }
+        public string nameOnCard { get; set; }
+    }
+
+    public class FundingAccountCardWalletRequest
+    {
+        public string nickName { get; set; }
+        public string emailAddress { get; set; }
+        public CardWalletDetail cardWalletDetail { get; set; }
+        public bool isDefaultFundingSource { get; set; }
+    }
+
+
+    public class FundingAccountUpdateACHWalletRequest
+    {
+        public string fundingAccountToken { get; set; }
+        public string nickName { get; set; }
+        public bool isDefaultFundingSource { get; set; }
+        public string updatedExpirationDate { get; set; }
+        public string updatedZipcode { get; set; }
+        public string updatedFirstName { get; set; }
+        public string updatedLastName { get; set; }
+        public string updatedCheckType { get; set; }
+        public string updatedFundingAccountType { get; set; }
+        public string fundingCategory { get; set; }
+    }
+
+    public class FundingAccountUpdateACHWalletResponse
+    {
+        public Result result { get; set; }
+    }
+
 }
 
