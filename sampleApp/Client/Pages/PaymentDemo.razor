@@ -1,4 +1,4 @@
-﻿@page "/payment/{AccountNum}/{AmountDue}/{MinDue?}"
+﻿@page "/payment-demo/{AccountNum}/{AmountDue}/{MinDue?}"
 @inject NavigationManager NavigationManager
 @inject HttpClient Http
 
@@ -88,12 +88,12 @@
                         </div>
 
                         <div class="d-flex justify-content-between mb-2">
-                            <span>Last Statement Date</span>
-                            <span>June 20</span>
+                            <span>Statement Date</span>
+                            <span>05/03/2023</span>
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>Due Date</span>
-                            <span>Jul 5</span>
+                            <span>May 31</span>
                         </div>
 
                     </div>
@@ -285,7 +285,19 @@
                                                 <div class="col-10"><label class="form-check-label" for="flexRadioDefault1" style="margin-left: -25px; ">Save Ach Information to Wallet</label></div>
                                             </div>
                                             <div class="p-3">
-                                                <button class="btn btn-primary btn-block free-button" style=" display: block;">Pay Now</button>
+
+                                                <button class="btn btn-primary btn-block free-button" @onclick="PaynowCardClick" style=" display: block;">
+                                                    @if (ShowProgressbtn)
+                                                    {
+                                                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                                        @ProgressMessage
+                                                    }
+                                                    else
+                                                    {
+                                                        @ButtonText
+                                                    }
+                                                </button>
+
                                             </div>
                                         </div>
                                     </div>

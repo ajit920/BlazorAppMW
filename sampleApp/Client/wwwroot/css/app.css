@@ -320,9 +320,8 @@ body {
 
 .image-center {
     display: block;
-    margin-left: 35%;
-    margin-right: auto;
-    width: 50%;
+    margin: 0 auto;
+    width: auto;
 }
 
 .checkmark__circle {
@@ -563,3 +562,110 @@ body {
 .align-items-center {
     align-items: center;
 }
+
+
+
+
+
+
+
+#input {
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: grey;
+    width: 100%;
+    min-width: unset;
+    background-color: transparent;
+    border-color: transparent;
+    margin: 0;
+}
+
+form a {
+    color: grey;
+    text-decoration: none;
+    font-size: 0.87rem;
+    font-weight: bold;
+}
+
+    form a:hover {
+        color: grey;
+        text-decoration: none;
+    }
+
+#saved-wallet .row {
+    margin: 0;
+    overflow: hidden;
+}
+
+#saved-wallet .row-1-custom {
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 0.5rem;
+    outline: none;
+    width: 100%;
+    min-width: unset;
+    border-radius: 5px;
+    background-color: rgb(0 0 0 / 30%);
+    border-color: rgba(221, 228, 236, 0.459);
+    margin: 2vh 0;
+    overflow: hidden;
+}
+
+#saved-wallet .row-2-custom {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0 0.8rem;
+}
+
+#saved-wallet .row-custom .row-2-custom {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0 0.8rem;
+}
+
+#saved-wallet .row-custom .col-2-custom, .col-7-custom, .col-3-custom {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 0 1vh;
+}
+
+#saved-wallet .row-custom .col-2-custom {
+    padding-right: 0;
+}
+
+.grey-text a{
+    color: #dedede;
+    text-decoration: none;
+    font-size: 0.87rem;
+    font-weight: bold;
+}
+
+.input1 i {
+    position: absolute;
+    top: 6px;
+    left: 11px;
+    color: #989898;
+}
+
+.input1 {
+    position: relative;
+}
+
+.apple-button {
+    background: #1565c0;
+    font-size: 38px;
+    border-radius: 8px;
+    display: block;
+}
+
+.line-height-2em {
+    line-height: 2em;
+}
+
+
