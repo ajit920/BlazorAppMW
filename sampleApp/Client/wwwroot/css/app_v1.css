@@ -14,6 +14,12 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
+.btn-fsv {
+    color: #fff;
+    background-color: #FF6600;
+    border-color: #FF6600;
+}
+
 .content {
     padding-top: 1.1rem;
 }
@@ -182,6 +188,25 @@ body {
     position: relative;
 }
 
+.card-fsv {
+    max-width: 500px;
+    width: 100%;
+    background-color: #666666;
+    margin: auto;
+    color: white;
+    border-radius: 10px;
+    position: relative;
+}
+.card-fsv-inner {
+    max-width: 500px;
+    width: 100%;
+    background-color: #333333;
+    margin: auto;
+    color: white;
+    border-radius: 10px;
+    position: relative;
+}
+
 p {
     margin: 0px;
 }
@@ -208,7 +233,18 @@ a {
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
-    background-color: #89ABE3FF;
+    background-color: #FF6600;
+    border: none;
+}
+
+.btn.btn-fsv {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    background-color: #FF6600;
     border: none;
 }
 
@@ -223,6 +259,11 @@ a {
 }
 
 .btn.btn-primary:hover .fas.fa-arrow-right {
+    transform: translate(15px);
+    transition: transform 0.2s ease-in;
+}
+
+.btn.btn-fsv:hover .fas.fa-arrow-right {
     transform: translate(15px);
     transition: transform 0.2s ease-in;
 }
@@ -335,8 +376,8 @@ body {
 }
 
 .checkmark {
-    width: 26px;
-    height: 26px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: block;
     stroke-width: 2;
@@ -658,7 +699,7 @@ form a {
 }
 
 .apple-button {
-    background: #1565c0;
+    background: #FF6600;
     font-size: 38px;
     border-radius: 8px;
     display: block;

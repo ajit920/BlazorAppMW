@@ -1,9 +1,9 @@
-﻿@page "/payment-demo/{AccountNum}/{AmountDue}/{MinDue?}"
+﻿@page "/payment-demo-v1/{billername}/{AccountNum}/{ConsumerName}/{DueDate}/{StatementDate}/{AmountDue}/{MinDue?}"
 @inject NavigationManager NavigationManager
 @inject HttpClient Http
 
 <div style="margin-bottom: 15px">
-    <img src="https://ebill-test.fiservapps.com/api/pass/abc" class="image-center" height="60" width="100" />
+    <img src="https://ebill-test.fiservapps.com/api/pass/logo/orangefinancials" class="image-center" height="60" width="100" />
 </div>
 <div class="">
 
@@ -14,7 +14,7 @@
             <div class="col-md-12">
                 @*<span>Summary</span>*@
 
-                <div class="card">
+                <div class="card-fsv">
 
                     <!--<div class="d-flex justify-content-between p-3">
 
@@ -97,11 +97,11 @@
 
                         <div class="d-flex justify-content-between mb-2">
                             <span>Statement Date</span>
-                            <span>05/03/2023</span>
+                            <span>@StatementDate</span>
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>Due Date</span>
-                            <span>May 31</span>
+                            <span>@DueDate</span>
                         </div>
 
                     </div>
@@ -116,9 +116,9 @@
                     </div>
                     @*<div class="p-3 d-flex "><span>Make Payment using </span></div>*@
                     <div class="p-3 d-flex justify-content-between">
-                        <div class="card">
+                        <div class="card-fsv-inner">
                             <div class="accordion" id="accordionExample" style="">
-                                <div class="card">
+                                <div class="card-fsv-inner">
                                     <div class="card-header p-0" id="headingTwo">
                                         <h2 class="mb-0">
 
@@ -207,7 +207,7 @@
                                             </div>
                                             <div class="p-3">
 
-                                                <button class="btn btn-primary btn-block free-button" @onclick="PaynowCardClick" style=" display: block;">
+                                                <button class="btn btn-fsv btn-block free-button" @onclick="PaynowCardClick" style=" display: block;">
                                                     @if (ShowProgressbtn)
                                                     {
                                                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
@@ -225,7 +225,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card">
+                                <div class="card-fsv-inner">
                                     <div class="card-header p-0">
                                         <h2 class="mb-0">
                                             <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -294,7 +294,7 @@
                                             </div>
                                             <div class="p-3">
 
-                                                <button class="btn btn-primary btn-block free-button" @onclick="PaynowCardClick" style=" display: block;">
+                                                <button class="btn btn-fsv btn-block free-button" @onclick="PaynowCardClick" style=" display: block;">
                                                     @if (ShowProgressbtn)
                                                     {
                                                         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
@@ -311,7 +311,7 @@
                                     </div>
 
                                 </div>
-                                <div class="card">
+                                <div class="card-fsv-inner">
                                     <div class="card-header p-0">
                                         <h2 class="mb-0">
                                             <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseWallet" aria-expanded="false" aria-controls="collapseWallet">
@@ -349,7 +349,7 @@
                                                         <div class="col-6">
                                                             <span class="font-weight-normal card-text">&nbsp;</span>
                                                             <div class="input">
-                                                                <button class="btn btn-primary btn-block btn-sm" style=" display: block; height:30px;" @onclick="PaynowCardClick">
+                                                                <button class="btn btn-fsv btn-block btn-sm" style=" display: block; height:30px;" @onclick="PaynowCardClick">
                                                                     @if (ShowProgressbtn)
                                                                     {
                                                                         <span class="spinner-grow spinner-grow-sm" style="font-size:8px" role="status" aria-hidden="true"></span>
@@ -388,7 +388,7 @@
                                                         <div class="col-6">
                                                             <span class="font-weight-normal card-text">&nbsp;</span>
                                                             <div class="input">
-                                                                <button class="btn btn-primary btn-block btn-sm" style=" display: block; height:30px;" @onclick="PaynowCardClick">
+                                                                <button class="btn btn-fsv btn-block btn-sm" style=" display: block; height:30px;" @onclick="PaynowCardClick">
                                                                     @if (ShowProgressbtn)
                                                                     {
                                                                         <span class="spinner-grow spinner-grow-sm" style="font-size:8px" role="status" aria-hidden="true"></span>
@@ -422,7 +422,7 @@
                                                         <div class="col-12">
                                                             <span class="font-weight-normal card-text">&nbsp;</span>
                                                             <div class="input">
-                                                                <button class="btn btn-primary btn-block btn-sm" style=" display: block; height:30px;" @onclick="PaynowCardClick">
+                                                                <button class="btn btn-fsv btn-block btn-sm" style=" display: block; height:30px;" @onclick="PaynowCardClick">
                                                                     @if (ShowProgressbtn)
                                                                     {
                                                                         <span class="spinner-grow spinner-grow-sm" style="font-size:8px" role="status" aria-hidden="true"></span>
@@ -453,7 +453,7 @@
                                                         <div class="col-12">
                                                             <span class="font-weight-normal card-text">&nbsp;</span>
                                                             <div class="input">
-                                                                <button class="btn btn-primary btn-block btn-sm" style=" display: block; height:40px;" @onclick="PaynowCardClick">
+                                                                <button class="btn btn-fsv btn-block btn-sm" style=" display: block; height:40px;" @onclick="PaynowCardClick">
                                                                     @if (ShowProgressbtn)
                                                                     {
                                                                         <span class="spinner-grow spinner-grow-sm" style="font-size:8px" role="status" aria-hidden="true"></span>
@@ -477,7 +477,7 @@
 
                                 </div>
 
-                                <div class="card">
+                                <div class="card-fsv-inner">
                                     <div class="card-header p-0">
                                         <h2 class="mb-0">
                                             <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -497,7 +497,7 @@
 
                                 </div>
 
-                                <div class="card" style="display:none">
+                                <div class="card-fsv-inner" style="display:none">
                                     <div class="card-header p-0">
                                         <h2 class="mb-0">
                                             <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -546,7 +546,6 @@
 
     else
     {
-
         <div style="text-align:center">
 
             <div class="spinner-grow" role="status">
@@ -640,6 +639,20 @@
 
     [Parameter]
     public string? MinDue { get; set; }
+
+    [Parameter]
+    public string ConsumerName { get; set; }
+
+    [Parameter]
+    public string DueDate { get; set; }
+
+    [Parameter]
+    public string StatementDate { get; set; }
+
+    [Parameter]
+    public string BillerName { get; set; }
+
+
 
     string PayableAmount = "0";
 
